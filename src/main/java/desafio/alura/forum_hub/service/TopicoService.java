@@ -13,6 +13,7 @@ import desafio.alura.forum_hub.domain.topico.Topico;
 import desafio.alura.forum_hub.repository.CursoRepository;
 import desafio.alura.forum_hub.repository.TopicoRepository;
 import desafio.alura.forum_hub.repository.UsuarioRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class TopicoService {
@@ -39,6 +40,12 @@ public class TopicoService {
 
     public Page<DadosTopico> listarTopicos(Pageable paginacao) {
         return topicoRepository.findAllByStatusTrue(paginacao).map(DadosTopico::new);
+    }
+
+    public DadosTopico detalharTopico(Long id) {
+        var topico = topicoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tópico não encontrado!"));
+        return new DadosTopico(topico);
     }
 
 }

@@ -11,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,14 @@ public class TopicoController {
         var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.id()).toUri();
 
         return ResponseEntity.created(uri).body(topico);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @GetMapping("/{id}")
+    public ResponseEntity detalharTopico(@PathVariable Long id) {
+        var topico = topicoService.detalharTopico(id);
+
+        return ResponseEntity.ok(topico);
     }
 
 }
