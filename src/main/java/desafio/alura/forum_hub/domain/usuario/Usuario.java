@@ -28,6 +28,12 @@ import lombok.Setter;
 @Table(name = "usuarios")
 public class Usuario {
 
+    public Usuario(DadosCriarUsuario dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.senha = dados.senha();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
