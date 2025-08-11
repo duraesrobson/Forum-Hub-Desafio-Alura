@@ -11,7 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import desafio.alura.forum_hub.domain.usuario.DadosCriarUsuario;
 import desafio.alura.forum_hub.domain.usuario.DadosUsuario;
 import desafio.alura.forum_hub.domain.usuario.Usuario;
-import desafio.alura.forum_hub.domain.usuario.UsuarioService;
 import desafio.alura.forum_hub.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
