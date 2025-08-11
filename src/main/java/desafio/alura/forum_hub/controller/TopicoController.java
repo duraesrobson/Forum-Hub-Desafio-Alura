@@ -17,6 +17,7 @@ import desafio.alura.forum_hub.domain.topico.Topico;
 import desafio.alura.forum_hub.repository.CursoRepository;
 import desafio.alura.forum_hub.repository.TopicoRepository;
 import desafio.alura.forum_hub.repository.UsuarioRepository;
+import desafio.alura.forum_hub.service.TopicoService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -24,30 +25,17 @@ import jakarta.validation.Valid;
 public class TopicoController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private CursoRepository cursoRepository;
-
-    @Autowired
-    private TopicoRepository topicoRepository;
+    private TopicoService topicoService;
 
     @SuppressWarnings("rawtypes")
     @PostMapping
     @Transactional
     public ResponseEntity criarTopico(@RequestBody @Valid DadosCriarTopico dados, UriComponentsBuilder uriBuilder) {
+        var topico = topicoService.criarTopico(dados);
 
-        LocalDateTime dataCriado = LocalDateTime.now();
+        var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.id()).toUri();
 
-        var usuario = usuarioRepository.getReferenceById(dados.idAutor());
-        var curso = cursoRepository.getReferenceById(dados.idCurso());
-
-        var topico = new Topico(null, dados.titulo(), dados.mensagem(), dataCriado, true, usuario, curso, null);
-        var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-
-        topicoRepository.save(topico);
-
-        return ResponseEntity.created(uri).body(new DadosTopico(topico));
+        return ResponseEntity.created(uri).body(topico);
     }
 
 }
