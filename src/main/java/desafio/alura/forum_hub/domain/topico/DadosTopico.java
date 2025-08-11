@@ -8,6 +8,7 @@ import desafio.alura.forum_hub.domain.resposta.Resposta;
 public record DadosTopico(
         Long id,
         String titulo,
+        String mensagem,
         LocalDateTime dataCriacao,
         Boolean status,
         Long idAutor,
@@ -17,7 +18,8 @@ public record DadosTopico(
 ) {
 
     public DadosTopico(Topico topico) {
-        this(topico.getId(), topico.getTitulo(), topico.getDataCriacao(), topico.getStatus(), topico.getAutor().getId(),
+        this(topico.getId(), topico.getTitulo(), topico.getMensagem(), topico.getDataCriacao(), topico.getStatus(),
+                topico.getAutor().getId(),
                 topico.getCurso().getId(), topico.getRespostas());
     }
 }
