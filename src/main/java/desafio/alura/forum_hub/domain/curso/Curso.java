@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,6 +22,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "cursos")
 public class Curso {
+
+    public Curso(DadosCriarCurso dados) {
+        this.nome = dados.nome();
+        this.categoria = dados.categoria();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
