@@ -1,8 +1,5 @@
 package desafio.alura.forum_hub.controller;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,10 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import desafio.alura.forum_hub.domain.topico.DadosCriarTopico;
 import desafio.alura.forum_hub.domain.topico.DadosTopico;
-import desafio.alura.forum_hub.domain.topico.Topico;
-import desafio.alura.forum_hub.repository.CursoRepository;
-import desafio.alura.forum_hub.repository.TopicoRepository;
-import desafio.alura.forum_hub.repository.UsuarioRepository;
 import desafio.alura.forum_hub.service.TopicoService;
 import jakarta.validation.Valid;
 
