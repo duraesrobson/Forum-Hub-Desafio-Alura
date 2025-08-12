@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import desafio.alura.forum_hub.domain.topico.DadosAtualizarTopico;
 import desafio.alura.forum_hub.domain.topico.DadosCriarTopico;
 import desafio.alura.forum_hub.domain.topico.DadosTopico;
 import desafio.alura.forum_hub.service.TopicoService;
@@ -50,6 +52,14 @@ public class TopicoController {
     public ResponseEntity detalharTopico(@PathVariable Long id) {
         var topico = topicoService.detalharTopico(id);
 
+        return ResponseEntity.ok(topico);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity atualizarTopico(@PathVariable @RequestBody Long id, DadosAtualizarTopico dados) {
+        var topico = topicoService.atualizarTopico(id, dados);
         return ResponseEntity.ok(topico);
     }
 

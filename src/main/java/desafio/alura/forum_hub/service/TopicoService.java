@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import desafio.alura.forum_hub.domain.topico.DadosAtualizarTopico;
 import desafio.alura.forum_hub.domain.topico.DadosCriarTopico;
 import desafio.alura.forum_hub.domain.topico.DadosTopico;
 import desafio.alura.forum_hub.domain.topico.Topico;
@@ -43,9 +44,37 @@ public class TopicoService {
     }
 
     public DadosTopico detalharTopico(Long id) {
+        return acharTopicoDTO(id);
+    }
+
+    public DadosTopico atualizarTopico(Long id, DadosAtualizarTopico dados) {
+        var topico = acharTopico(id);
+
+        if (dados.titulo() != null) {
+            topico.setTitulo(dados.titulo());
+        }
+        if (dados.mensagem() != null) {
+            topico.setMensagem(dados.mensagem());
+        }
+
+        topicoRepository.save(topico);
+        return new DadosTopico(topico);
+    }
+
+    public void apagarTopico(Long id) {
+        topicoRepository.deleteById(id);
+    }
+
+    public DadosTopico acharTopicoDTO(Long id) {
         var topico = topicoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Tópico não encontrado!"));
+
         return new DadosTopico(topico);
+    }
+
+    public Topico acharTopico(Long id) {
+        return topicoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Tópico não encontrado!"));
     }
 
 }

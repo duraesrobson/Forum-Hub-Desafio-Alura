@@ -51,4 +51,5 @@ public class Topico {
 
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Resposta> respostas = new ArrayList<>();
+
 }

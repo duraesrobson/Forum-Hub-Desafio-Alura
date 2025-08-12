@@ -22,4 +22,5 @@ public record DadosTopico(
                 topico.getAutor().getId(),
                 topico.getCurso().getId(), topico.getRespostas());
     }
+
 }
