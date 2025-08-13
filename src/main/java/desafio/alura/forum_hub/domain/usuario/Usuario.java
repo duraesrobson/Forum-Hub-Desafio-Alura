@@ -28,12 +28,6 @@ import lombok.Setter;
 @Table(name = "usuarios")
 public class Usuario {
 
-    public Usuario(DadosCriarUsuario dados) {
-        this.nome = dados.nome();
-        this.email = dados.email();
-        this.senha = dados.senha();
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -45,4 +39,10 @@ public class Usuario {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuarios_perfis", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
     private List<Perfil> perfis = new ArrayList<>();
+
+    public Usuario(String nome, String email, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
 }
