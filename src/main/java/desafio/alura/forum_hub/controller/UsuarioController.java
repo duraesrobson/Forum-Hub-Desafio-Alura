@@ -10,24 +10,24 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import desafio.alura.forum_hub.domain.usuario.DadosCriarUsuario;
 import desafio.alura.forum_hub.domain.usuario.DadosUsuario;
-import desafio.alura.forum_hub.domain.usuario.Usuario;
-import desafio.alura.forum_hub.repository.UsuarioRepository;
+import desafio.alura.forum_hub.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuarios")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
     @SuppressWarnings("rawtypes")
     @PostMapping
     @Transactional
     public ResponseEntity criarUsuario(@RequestBody @Valid DadosCriarUsuario dados, UriComponentsBuilder uriBuilder) {
-        var usuario = new Usuario(dados);
-        usuarioRepository.save(usuario);
+        var usuario = usuarioService.criarUsuario(dados);
 
         var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
 
