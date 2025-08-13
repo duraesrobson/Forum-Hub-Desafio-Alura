@@ -12,10 +12,14 @@ import desafio.alura.forum_hub.domain.usuario.Usuario;
 
 public class UsuarioSecurity implements UserDetails {
 
-    private final Usuario usuario;
+    private Usuario usuario;
 
     public UsuarioSecurity(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     // verifica se tem algum perfil e autoriza, se não tiver cria um padrão.
