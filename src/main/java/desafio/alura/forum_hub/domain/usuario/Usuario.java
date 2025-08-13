@@ -35,6 +35,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private Boolean ativo = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "usuarios_perfis", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "perfil_id"))
@@ -44,5 +45,13 @@ public class Usuario {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+    }
+
+    public void desativarUsuario() {
+        this.ativo = false;
+    }
+
+    public void reativarUsuario() {
+        this.ativo = true;
     }
 }
