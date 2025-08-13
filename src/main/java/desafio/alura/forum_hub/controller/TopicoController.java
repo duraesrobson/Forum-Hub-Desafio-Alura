@@ -21,10 +21,12 @@ import desafio.alura.forum_hub.domain.topico.DadosAtualizarTopico;
 import desafio.alura.forum_hub.domain.topico.DadosCriarTopico;
 import desafio.alura.forum_hub.domain.topico.DadosTopico;
 import desafio.alura.forum_hub.service.TopicoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
@@ -64,6 +66,7 @@ public class TopicoController {
         return ResponseEntity.ok(topico);
     }
 
+    @SuppressWarnings("rawtypes")
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity apagarTopico(@PathVariable @RequestBody Long id) {

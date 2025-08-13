@@ -13,10 +13,12 @@ import desafio.alura.forum_hub.domain.curso.Curso;
 import desafio.alura.forum_hub.domain.curso.DadosCriarCurso;
 import desafio.alura.forum_hub.domain.curso.DadosCurso;
 import desafio.alura.forum_hub.repository.CursoRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/cursos")
+@SecurityRequirement(name = "bearer-key")
 public class CursoController {
 
     @Autowired
